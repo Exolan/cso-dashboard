@@ -8,14 +8,13 @@ import {
   Title,
   Tooltip,
   Legend,
-  Colors,
   type ChartOptions,
 } from "chart.js";
 
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { Bar } from "react-chartjs-2";
-import type { Program } from "../types/types";
+import type { Program } from "../../../app/types/types";
 
 ChartJS.register(
   CategoryScale,
@@ -26,41 +25,29 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Colors,
   ChartDataLabels,
 );
 
-interface BarPlanFactChartProps {
-  labels: Array<string>;
+interface BarChartProps {
   program: Program;
-  color: string;
 }
 
-const BarPlanFactChart = ({
-  labels,
-  program,
-  color,
-}: BarPlanFactChartProps) => {
+const BarChart = ({ program }: BarChartProps) => {
   const options: ChartOptions<"bar"> = {
-    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
     plugins: {
       legend: {
         position: "top" as const,
       },
-      title: {
-        display: false,
-      },
-      colors: {
-        enabled: true,
-      },
       datalabels: {
-        color: "#000",
-        anchor: "center", // или 'center', 'start'
-        align: "top", // или 'bottom', 'center'
         formatter: (value: number) => value.toLocaleString(),
         font: {
           weight: "bold",
-          size: 12,
+          size: 20,
         },
       },
     },
@@ -71,11 +58,11 @@ const BarPlanFactChart = ({
   const label = program.programName;
 
   const data = {
-    labels: labels,
-    datasets: [{ label: label, data: values, backgroundColor: color }],
+    labels: ["План", "Факт"],
+    datasets: [{ label: label, data: values }],
   };
 
   return <Bar options={options} data={data} />;
 };
 
-export default BarPlanFactChart;
+export default BarChart;

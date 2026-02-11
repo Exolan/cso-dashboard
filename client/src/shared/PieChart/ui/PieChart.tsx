@@ -1,15 +1,15 @@
 import { Pie } from "react-chartjs-2";
-import type { Program } from "../types/types";
+import type { Program } from "../../../app/types/types";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-interface PiePercentChartProps {
+interface PieChartProps {
   program: Program;
 }
 
-export const PiePercentChart = ({ program }: PiePercentChartProps) => {
+export const PieChart = ({ program }: PieChartProps) => {
   const value = Math.round(program.programData[2].dataValue);
   const label = program.programName;
 
