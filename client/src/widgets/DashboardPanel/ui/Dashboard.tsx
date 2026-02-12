@@ -20,8 +20,10 @@ const Dashboard = ({ programs }: DashboardProps) => {
               </header>
               <div className={styles.chartsConteiner}>
                 <div className={styles.chart}>
-                  <h3>План vs Факт</h3>
-                  <BarChart program={program} />
+                  <BarChart
+                    program={program}
+                    unit={program.programName === "ППК" ? "чел/ч" : "шт"}
+                  />
                 </div>
                 <div className={styles.chart}>
                   <PieChart program={program} />
