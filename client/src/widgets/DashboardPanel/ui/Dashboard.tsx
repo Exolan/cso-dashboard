@@ -12,26 +12,29 @@ const Dashboard = ({ programs }: DashboardProps) => {
   return (
     <div className={styles.dashboard}>
       {programs.map((program) => {
-        if (program.programName !== "Проф.переподготовка") {
-          return (
-            <div key={program.programName} className={styles.dashboardBlock}>
-              <header className={styles.dashboardHeader}>
-                <h3>{program.programName}</h3>
-              </header>
-              <div className={styles.chartsConteiner}>
-                <div className={styles.chart}>
-                  <BarChart
-                    program={program}
-                    unit={program.programName === "ППК" ? "чел/ч" : "шт"}
-                  />
-                </div>
-                <div className={styles.chart}>
-                  <PieChart program={program} />
-                </div>
+        return (
+          <div key={program.programName} className={styles.dashboardBlock}>
+            <header className={styles.dashboardHeader}>
+              <h3>{program.programName}</h3>
+            </header>
+            <div className={styles.chartsConteiner}>
+              <div className={styles.chart}>
+                <BarChart
+                  program={program}
+                  unit={
+                    program.programName === "ППК" ||
+                    program.programName === "Проф.переподготовка"
+                      ? "чел/ч"
+                      : "шт"
+                  }
+                />
+              </div>
+              <div className={styles.chart}>
+                <PieChart program={program} />
               </div>
             </div>
-          );
-        }
+          </div>
+        );
       })}
     </div>
   );

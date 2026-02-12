@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { DashboardData } from "../../../app/types/types";
 import { fetchData } from "../api/fetchData";
 import DashboardWidget from "../../../widgets/DashboardPanel";
+import DropdownWidget from "../../../widgets/DropdownPanel";
 
 import styles from "./Home.module.scss";
 
@@ -14,11 +15,22 @@ function Home() {
     const getData = async () => {
       const data = await fetchData();
       setDashboardData(data);
-      console.log(data);
     };
 
     getData();
   }, []);
+
+  const dashboardPrograms = useMemo(
+    () =>
+      dashboardData?.programs.filter((_, index) => [0, 2, 3].includes(index)) ??
+      [],
+    [dashboardData],
+  );
+
+  const dropdownPrograms = useMemo(
+    () => dashboardData?.programs.filter((_, index) => index === 1) ?? [],
+    [dashboardData],
+  );
 
   if (!dashboardData) return <span>Загрузка...</span>;
 
@@ -28,7 +40,8 @@ function Home() {
         <h1>{dashboardData.title}</h1>
       </header>
       <div className={styles.conteiner}>
-        <DashboardWidget programs={dashboardData.programs} />
+        <DashboardWidget programs={dashboardPrograms} />
+        <DropdownWidget programs={dropdownPrograms} />
       </div>
     </div>
   );

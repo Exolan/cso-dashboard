@@ -1,0 +1,17 @@
+.dropdown {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.buttonBlock {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.button {
+  border-radius: 1rem;
+  border: none;
+}
