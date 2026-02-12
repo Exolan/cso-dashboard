@@ -25,6 +25,8 @@ interface BarChartProps {
 }
 
 const BarChart = ({ program, unit }: BarChartProps) => {
+  const remainder = program.programData[3].dataValue;
+
   const options: ChartOptions<"bar"> = {
     maintainAspectRatio: false,
     responsive: true,
@@ -48,6 +50,15 @@ const BarChart = ({ program, unit }: BarChartProps) => {
       },
     },
     plugins: {
+      title: {
+        display: true,
+        text: `Остаток: ${remainder} ${unit}`,
+        color: "black",
+        font: {
+          weight: "bold",
+          size: 20,
+        },
+      },
       legend: {
         display: false,
         position: "top" as const,
