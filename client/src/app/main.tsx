@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.module.scss";
+import "./index.scss";
 import Home from "../pages/home";
 
 createRoot(document.getElementById("root")!).render(
